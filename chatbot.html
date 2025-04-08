@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Injury Prevention Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-circle {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  background-color: #23587c;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.chatbot-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+
+
+    .chat-circle:hover {
+      background-color: #456ba0;
+    }
+
+    /* Chatbot Container */
+    /* .chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      width: 300px;
+      max-height: 400px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    } */
+
+    .chat-header {
+      background-color: #4caf50;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+
+    .user {
+      text-align: right;
+      color: #333;
+    }
+
+    .bot {
+      text-align: left;
+      color: #4caf50;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating Chat Circle -->
+<div class="chat-circle" onclick="toggleChat()">💬</div>
+
+<!-- Chatbot Window -->
+<div class="chatbot-container" id="chatbot">
+  <div class="chat-header">
+    InjuryBot
+    <button class="close-btn" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="messages"></div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Type your message..." />
+    <button onclick="handleInput()">Send</button>
+  </div>
+</div>
+
+<script>
+  function toggleChat() {
+  const chatbox = document.getElementById("chatbot");
+  const frame = window.frameElement; // Reference to iframe from inside
+
+  if (chatbox.style.display === "flex") {
+    chatbox.style.display = "none";
+    frame.style.width = "80px";
+    frame.style.height = "80px";
+    frame.style.borderRadius = "50%";
+  } else {
+    chatbox.style.display = "flex";
+    frame.style.width = "350px";
+    frame.style.height = "500px";
+    frame.style.borderRadius = "20px";
+  }
+}
+
+
+
+  function handleInput() {
+    const input = document.getElementById("userInput").value.trim();
+    if (!input) return;
+
+    addMessage(input, "user");
+    document.getElementById("userInput").value = "";
+
+    const response = getBotResponse(input.toLowerCase());
+    setTimeout(() => addMessage(response, "bot"), 500);
+  }
+
+  function addMessage(text, sender) {
+    const messageBox = document.getElementById("messages");
+    const msg = document.createElement("div");
+    msg.className = `message ${sender}`;
+    msg.textContent = text;
+    messageBox.appendChild(msg);
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
+  function getBotResponse(input) {
+  input = input.toLowerCase();
+
+  if (input.includes("hello") || input.includes("hi") || input.includes("hey") || input.includes("good morning") || input.includes("good evening")) {
+    return "Hello! How can I help you stay safe today?";
+  } else if (input.includes("fall") || input.includes("slip") || input.includes("trip") || input.includes("stairs")) {
+    return "To prevent falls, keep walkways clear, use non-slip mats, and install handrails on stairs.";
+  } else if (input.includes("first aid") || input.includes("injury") || input.includes("wound") || input.includes("cut")) {
+    return "Basic first aid: clean the wound with water, apply antiseptic, bandage it, and seek help if needed.";
+  } else if (input.includes("exercise") || input.includes("workout") || input.includes("fitness")) {
+    return "Warm up before exercise, stretch your muscles, and stay hydrated to avoid strains or cramps.";
+  } else if (input.includes("sports") || input.includes("game") || input.includes("training")) {
+    return "Use proper gear, stretch, and follow rules to avoid sports injuries like sprains or dislocations.";
+  } else if (input.includes("diet") || input.includes("food") || input.includes("nutrition")) {
+    return "A balanced diet helps strengthen bones and muscles, preventing injury. Include calcium and protein.";
+  } else if (input.includes("hydration") || input.includes("water") || input.includes("drink")) {
+    return "Drink plenty of water throughout the day. Dehydration can lead to fatigue and increase risk of injury.";
+  } else if (input.includes("rest") || input.includes("sleep") || input.includes("tired")) {
+    return "Proper rest allows the body to heal. Aim for 7-9 hours of sleep per night to prevent fatigue-related injuries.";
+  } else if (input.includes("emergency") || input.includes("ambulance") || input.includes("hospital")) {
+    return "In an emergency, call your local helpline or visit the nearest hospital immediately.";
+  } else if (input.includes("burn") || input.includes("scald") || input.includes("fire")) {
+    return "For minor burns, cool the burn under running water for 10–15 minutes and cover it with a sterile cloth.";
+  } else if (input.includes("fracture") || input.includes("broken bone") || input.includes("break")) {
+    return "Suspect a fracture? Immobilize the area and seek medical help immediately. Avoid moving the limb.";
+  } else if (input.includes("sprain") || input.includes("strain")) {
+    return "For sprains or strains, use R.I.C.E: Rest, Ice, Compression, and Elevation.";
+  } else if (input.includes("bleeding") || input.includes("blood")) {
+    return "Apply direct pressure to the wound with a clean cloth to stop bleeding, and seek medical help if it's severe.";
+  } else if (input.includes("concussion") || input.includes("head injury") || input.includes("hit head")) {
+    return "After a head injury, look for signs of concussion like dizziness, nausea, or confusion. Seek medical attention immediately.";
+  } else if (input.includes("thank you") || input.includes("thanks")) {
+    return "You're welcome! Stay safe and feel free to ask me anything else.";
+  } else {
+    return "I'm not sure how to respond to that. Try asking about injuries like fractures, burns, or sprains.";
+  }
+}
+
+</script>
+
+</body>
+</html>
