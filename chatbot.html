@@ -61,7 +61,7 @@
     } */
 
     .chat-header {
-      background-color: #4caf50;
+      background-color: #123492;
       color: white;
       padding: 12px;
       font-weight: bold;
@@ -96,7 +96,7 @@
 
     .bot {
       text-align: left;
-      color: #4caf50;
+      color: #2380c7;
     }
 
     .chat-input {
@@ -112,7 +112,7 @@
     }
 
     .chat-input button {
-      background-color: #4caf50;
+      background-color: #548fd4;
       color: white;
       border: none;
       padding: 10px 15px;
@@ -120,7 +120,7 @@
     }
 
     .chat-input button:hover {
-      background-color: #45a049;
+      background-color: #2d61e5;
     }
   </style>
 </head>
@@ -213,13 +213,45 @@
     return "Apply direct pressure to the wound with a clean cloth to stop bleeding, and seek medical help if it's severe.";
   } else if (input.includes("concussion") || input.includes("head injury") || input.includes("hit head")) {
     return "After a head injury, look for signs of concussion like dizziness, nausea, or confusion. Seek medical attention immediately.";
+  } else if (input.includes("dislocation")) {
+    return "If you suspect a dislocation, do not try to pop it back. Immobilize and get medical attention immediately.";
+  } else if (input.includes("back pain") || input.includes("lower back") || input.includes("spine")) {
+    return "For back pain, apply ice for the first 48 hours, then heat. Avoid heavy lifting and rest properly.";
+  } else if (input.includes("cramps") || input.includes("muscle cramp")) {
+    return "Stretch the muscle gently and massage it. Drink fluids with electrolytes to prevent cramps.";
+  } else if (input.includes("dehydration")) {
+    return "Signs of dehydration include dizziness and dry mouth. Drink water and electrolyte-rich drinks.";
+  } else if (input.includes("eye injury") || input.includes("eye pain")) {
+    return "For eye injuries, rinse gently with clean water. Avoid rubbing and seek medical care.";
+  } else if (input.includes("nosebleed")) {
+    return "Lean forward slightly, pinch your nose just above the nostrils for 10 minutes. Don’t tilt your head back.";
+  } else if (input.includes("toothache") || input.includes("dental pain")) {
+    return "Rinse mouth with warm saltwater. Apply a cold compress. Visit a dentist if pain persists.";
+  } else if (input.includes("fever")) {
+    return "Drink fluids, rest, and take fever-reducing medication if necessary. Consult a doctor if it persists.";
+  } else if (input.includes("insect bite") || input.includes("bug bite")) {
+    return "Clean the area with soap and water, apply a cold compress, and take antihistamines if itchy.";
+  } else if (input.includes("allergy") || input.includes("allergic reaction")) {
+    return "Mild allergies: take antihistamines. Severe allergies: use an epinephrine injector and call emergency help.";
+  } else if (input.includes("shock")) {
+    return "Lay the person down, elevate feet unless there's injury, and keep them warm. Call emergency services.";
+  } else if (input.includes("poisoning") || input.includes("toxic")) {
+    return "Do not induce vomiting. Call a poison control center or emergency help immediately.";
+  } else if (input.includes("choking")) {
+    return "Encourage coughing if possible. For severe choking, perform the Heimlich maneuver and call emergency services.";
+  } else if (input.includes("drowning")) {
+    return "Call for help. Start CPR if the person is unresponsive and not breathing. Do not delay.";
+  } else if (input.includes("hypothermia")) {
+    return "Move the person to a warm place, remove wet clothes, and cover with blankets. Avoid direct heat.";
+  } else if (input.includes("heat stroke") || input.includes("heat exhaustion")) {
+    return "Move to a cool place, give cool fluids, and apply cool cloths. Seek immediate help if symptoms worsen.";
   } else if (input.includes("thank you") || input.includes("thanks")) {
-    return "You're welcome! Stay safe and feel free to ask me anything else.";
+    return "You're welcome! Stay safe and feel free to ask me anything else.(Khush reh Bhai😉)";
   } else {
-    return "I'm not sure how to respond to that. Try asking about injuries like fractures, burns, or sprains.";
+    return "I'm not sure how to respond to that. Try asking about injuries like fractures, burns, or dislocations.(Bhai aacha kch puch le🤷‍♂️)";
   }
 }
-<div></div>
+
 </script>
 
 </body>
